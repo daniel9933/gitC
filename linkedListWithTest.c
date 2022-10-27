@@ -55,7 +55,7 @@ int main()
     return 0;
 }
 
-int print_empty_list_should_not_fail_and_print_length_0()
+int test_print_empty_list_should_not_fail_and_print_length_0()
 {
     // 1. Print empty list should not fail and print length 0 // success
     // 2. add one and delete one then add another one and print //success
@@ -76,7 +76,7 @@ int print_empty_list_should_not_fail_and_print_length_0()
     return 0;
 }
 
-void add_one_and_delete_one_then_add_another_one_and_print()
+void test_add_one_and_delete_one_then_add_another_one_and_print()
 {
     ListNode* newNode = NULL;
     ListNode* head = NULL;
@@ -92,10 +92,11 @@ void add_one_and_delete_one_then_add_another_one_and_print()
     print(head);//print the list.
 }
 
-void add_three_elements_try_to_find_each()
+void test_add_three_elements_try_to_find_each()
 {
     ListNode* newNode = NULL;
     ListNode* head = NULL;
+    ListNode* index = NULL;
 
     newNode = createNode(3);
     insert(&head, newNode);
@@ -108,12 +109,26 @@ void add_three_elements_try_to_find_each()
 
     print(head);
 
-    find(head, 1);
-    find(head, 2);
-    find(head, 3);
+    if((index = find(head, 4))!= NULL)
+    {
+        printf("value was found, it is : %d\n", index->num);
+    }
+    else if ((index = find(head, 4)) == NULL)
+    {
+        printf("value wasn't found or the list is empty.\n");
+    }
+
+    if((index = find(head, 3))!= NULL)
+    {
+        printf("value was found, it is : %d\n", index->num);
+    }
+    else if ((index = find(head, 3)) == NULL)
+    {
+        printf("value wasn't found or the list is empty.\n");
+    }
 }
 
-void add_three_verify_len_is_3()
+void test_add_three_verify_len_is_3()
 {
     ListNode* newNode = NULL;
     ListNode* head = NULL;
@@ -134,7 +149,7 @@ void add_three_verify_len_is_3()
 
 }
 
-void add_3_delete_from_each_spot()
+void test_add_3_delete_from_each_spot()
 {
     ListNode* newNode = NULL;
     ListNode* head = NULL;
@@ -251,15 +266,15 @@ This function deletes a node in the list.
 input - the adress of pointer to the list and the index of the node we want to delete.
 output - none
 */
-//TODO: change the function.
 void delete(ListNode** head, int delIndex)
 {
     ListNode* p = *head;
     ListNode* del = NULL;
-    int i = 1;
+    int i = 0;
+
     if (*head)
     {
-        if (i == delIndex)
+        if (i == delIndex - 1)
         {
             *head = p->next;
 
@@ -267,9 +282,9 @@ void delete(ListNode** head, int delIndex)
             p = NULL;
         }
 
-        else if (p->next)
+        else if (p->next != NULL)
         {
-            while (i < delIndex - 1)
+            while (i < delIndex - 2)
             {
                 p = p->next;
                 i++;
@@ -288,44 +303,31 @@ This function finds a value in the list and prints it's index.
 input - the adress of the head node in the list and the number we want to find.
 output - none
 */
-//TODO: shorten the function.
 ListNode* find(ListNode* head, int value)
 {
-    int index = 1;
-    int i = 1;
+    int index = 0;
+    int i = 0;
     int len = 0;
     ListNode* p = head;
 
     len = length(head);
 
-    if (head)
+    if (head)//checks if the list is empty, if it isnt goes in.
     {
-        for (i = 1; i < len; i++)
+        while (p->num != value && index < len)
         {
-            if (head->num == value)
+            index++;
+            p = p->next;
+            if (p == NULL)
             {
-                printf("the number %d is at index : %d\n", value, index);
-
-                return;
-            }
-            else if (head->next->num == value)
-            {
-                index++;
-                printf("the number %d is at index : %d\n", number, index);
-
-                return;
-            }
-            else
-            {
-                head = head->next;
-                index++;
+                return p;
             }
         }
-        printf("the number %d doesn't exit in the linked list.\n", value);
     }
     else
     {
-        printf("list is empty\n");
+        p = NULL;
     }
-    return ;
+    
+    return p;
 }
