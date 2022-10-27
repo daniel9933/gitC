@@ -2,27 +2,28 @@
 #include <stdlib.h>
 
 
-typedef struct listNode
+typedef struct ListNode
 {
     int num;
-    struct listNode* next;
-} listNode;
+    struct ListNode* next;
+} ListNode;
 
 
-listNode* createNode(int num);
-void insert(listNode** head, listNode* newNode);
-void print(listNode* head);
-int length(listNode* head);
-void delete(listNode** head, int delIndex);
-void find(listNode* head, int number);
+ListNode* createNode(int num);
+void insert(ListNode** head, ListNode* newNode);
+void print(ListNode* head);
+int length(ListNode* head);
+void delete(ListNode** head, int delIndex);
+ListNode* find(ListNode* head, int value);
 
 
 
 int main()
 {
     
-    listNode* newNode = NULL;
-    listNode* first = NULL;
+    ListNode* newNode = NULL;
+    ListNode* head = NULL;
+    ListNode* index = NULL;
 
     int len = 0;
     int delIndex = 0;
@@ -41,21 +42,29 @@ int main()
         getchar();
 
         newNode = createNode(num);
-        insert(&first, newNode);
+        insert(&head, newNode);
     }
 
-    print(first);
+    print(head);
 
     printf("which node to delete?\n");
     scanf("%d", &delIndex);
     getchar();
 
-    delete(&first, delIndex);
-    print(first);
+    delete(&head, delIndex);
+    print(head);
 
     printf("which num to find?\n");
     scanf("%d", &numToFind);
-    find(first, numToFind);
+
+    if((index = find(head, numToFind))!= NULL)
+    {
+        printf("value was found, it is : %d\n", index->num);
+    }
+    else if ((index = find(head, numToFind)) == NULL)
+    {
+        printf("value wasn't found or the list is empty.\n");
+    }
 
     getchar();
     return 0;
@@ -63,12 +72,12 @@ int main()
 
 /*
 This function prints the linked list 
-input - the adress of the first node in the list.
+input - the adress of the head node in the list.
 output - none
 */
-void print(listNode* head)
+void print(ListNode* head)
 {
-    listNode* curr = head;
+    ListNode* curr = head;
     printf("the list:\n");
 
     while (curr)
@@ -84,12 +93,12 @@ This function creates a node
 input - the integer you want in the node.
 output - a pointer to a struct with the values.
 */
-listNode* createNode(int num)
+ListNode* createNode(int num)
 {
-    listNode* newlistNode = (listNode*)malloc(sizeof(listNode));
-    newlistNode->num = num;
-    newlistNode->next = NULL;
-    return newlistNode;
+    ListNode* newListNode = (ListNode*)malloc(sizeof(ListNode));
+    newListNode->num = num;
+    newListNode->next = NULL;
+    return newListNode;
 }
 
 /*
@@ -97,7 +106,7 @@ This function inserts the node into the list.
 input - the adress of the pointer to the list and the new node you want to insert.
 output - none
 */
-void insert(listNode** head, listNode* newNode)
+void insert(ListNode** head, ListNode* newNode)
 {
     if (!*head)//if head is NULL
     {
@@ -105,7 +114,7 @@ void insert(listNode** head, listNode* newNode)
     }
     else
     {
-        listNode* p = *head;
+        ListNode* p = *head;
         while (p->next)
         {
             p = p->next;
@@ -116,10 +125,10 @@ void insert(listNode** head, listNode* newNode)
 
 /*
 This function calculates the length of the list
-input - the adress of the first node in the list.
+input - the adress of the head node in the list.
 output - the length of the list.
 */
-int length(listNode* head)
+int length(ListNode* head)
 {
     int len = 1;//starts from 1.
     if (head)
@@ -142,14 +151,15 @@ This function deletes a node in the list.
 input - the adress of pointer to the list and the index of the node we want to delete.
 output - none
 */
-void delete(listNode** head, int delIndex)
+void delete(ListNode** head, int delIndex)
 {
-    listNode* p = *head;
-    listNode* del = NULL;
-    int i = 1;
+    ListNode* p = *head;
+    ListNode* del = NULL;
+    int i = 0;
+
     if (*head)
     {
-        if (i == delIndex)
+        if (i == delIndex - 1)
         {
             *head = p->next;
 
@@ -157,9 +167,9 @@ void delete(listNode** head, int delIndex)
             p = NULL;
         }
 
-        else if (p->next)
+        else if (p->next != NULL)
         {
-            while (i < delIndex - 1)
+            while (i < delIndex - 2)
             {
                 p = p->next;
                 i++;
@@ -175,45 +185,34 @@ void delete(listNode** head, int delIndex)
 
 /*
 This function finds a value in the list and prints it's index.
-input - the adress of the first node in the list and the number we want to find.
-output - none
+input - the adress of the head node in the list and the number we want to find.
+output - Pointer to the index where the value is stored in the list, if its empty then NULL and if it isn't found NULL.
 */
-void find(listNode* head, int number)
+ListNode* find(ListNode* head, int value)
 {
-    int index = 1;
-    int i = 1;
+    int index = 0;
+    int i = 0;
     int len = 0;
+    ListNode* p = head;
 
     len = length(head);
 
-    if (head)
+    if (head)//checks if the list is empty, if it isnt goes in.
     {
-        for (i = 1; i < len; i++)
+        while (p->num != value && index < len)
         {
-            if (head->num == number)
+            index++;
+            p = p->next;
+            if (p == NULL)
             {
-                printf("the number %d is at index : %d\n", number, index);
-
-                return;
-            }
-            else if (head->next->num == number)
-            {
-                index++;
-                printf("the number %d is at index : %d\n", number, index);
-
-                return;
-            }
-            else
-            {
-                head = head->next;
-                index++;
+                return p;
             }
         }
-        printf("the number %d doesn't exit in the linked list.\n", number);
     }
     else
     {
-        printf("list is empty\n");
+        p = NULL;
     }
-    return;
+    
+    return p;
 }
