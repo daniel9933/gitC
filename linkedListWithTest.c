@@ -7,7 +7,7 @@
             return 1;\
         };\
 }
-#define test(testName,functionname) {\
+#define test(testName, functionname) {\
     int res = functionname(); \
     if (res != 0) { \
         printf("FAIL: %s",testName);\
@@ -66,12 +66,12 @@ int print_empty_list_should_not_fail_and_print_length_0()
     // 7. add 3 delete last //success
 
     ListNode* newNode = NULL;
-    ListNode* first = NULL;
+    ListNode* head = NULL;
     int len = 0;
 
-    len = length(first);
+    len = length(head);
 
-    print(first);
+    print(head);
     ASSERT(len == 0);
     return 0;
 }
@@ -79,56 +79,56 @@ int print_empty_list_should_not_fail_and_print_length_0()
 void add_one_and_delete_one_then_add_another_one_and_print()
 {
     ListNode* newNode = NULL;
-    ListNode* first = NULL;
+    ListNode* head = NULL;
 
     newNode = createNode(1);//create new node
-    insert(&first, newNode);
+    insert(&head, newNode);
 
-    delete(&first, 1);//delete it
+    delete(&head, 1);//delete it
 
     newNode = createNode(2);//create another node
-    insert(&first, newNode);
+    insert(&head, newNode);
 
-    print(first);//print the list.
+    print(head);//print the list.
 }
 
 void add_three_elements_try_to_find_each()
 {
     ListNode* newNode = NULL;
-    ListNode* first = NULL;
+    ListNode* head = NULL;
 
     newNode = createNode(3);
-    insert(&first, newNode);
+    insert(&head, newNode);
 
     newNode = createNode(1);
-    insert(&first, newNode);
+    insert(&head, newNode);
 
     newNode = createNode(2);
-    insert(&first, newNode);
+    insert(&head, newNode);
 
-    print(first);
+    print(head);
 
-    find(first, 1);
-    find(first, 2);
-    find(first, 3);
+    find(head, 1);
+    find(head, 2);
+    find(head, 3);
 }
 
 void add_three_verify_len_is_3()
 {
     ListNode* newNode = NULL;
-    ListNode* first = NULL;
+    ListNode* head = NULL;
     int len = 0;
 
     newNode = createNode(1);
-    insert(&first, newNode);
+    insert(&head, newNode);
 
     newNode = createNode(2);
-    insert(&first, newNode);
+    insert(&head, newNode);
 
     newNode = createNode(3);
-    insert(&first, newNode);
+    insert(&head, newNode);
 
-    len = length(first);
+    len = length(head);
 
     printf("\nthe lenght of this list is: %d\n", len);
 
@@ -137,42 +137,42 @@ void add_three_verify_len_is_3()
 void add_3_delete_from_each_spot()
 {
     ListNode* newNode = NULL;
-    ListNode* first = NULL;
+    ListNode* head = NULL;
 
     newNode = createNode(1);
-    insert(&first, newNode);
+    insert(&head, newNode);
 
     newNode = createNode(2);
-    insert(&first, newNode);
+    insert(&head, newNode);
 
     newNode = createNode(3);
-    insert(&first, newNode);
+    insert(&head, newNode);
 
 
 //from the start.
-    print(first);//print the list before the removal.
-    delete(&first, 1);//delete from the start.
-    print(first);//print the list after the removal.
+    print(head);//print the list before the removal.
+    delete(&head, 1);//delete from the start.
+    print(head);//print the list after the removal.
 
 //from the middle.
     newNode = createNode(4);//add a node back
-    insert(&first, newNode);
-    print(first);//print the list before the removal.
-    delete(&first, 2);//delete from the middle.
-    print(first);//print the list after the removal.
+    insert(&head, newNode);
+    print(head);//print the list before the removal.
+    delete(&head, 2);//delete from the middle.
+    print(head);//print the list after the removal.
 
 //from the end.
     newNode = createNode(5);//add a node back
-    insert(&first, newNode);
-    print(first);//print the list before the removal.
-    delete(&first, 3);//delete from the end.
-    print(first); //print the list after the removal.
+    insert(&head, newNode);
+    print(head);//print the list before the removal.
+    delete(&head, 3);//delete from the end.
+    print(head); //print the list after the removal.
 }
 
 
 /*
 This function prints the linked list
-input - the adress of the first node in the list.
+input - the adress of the head node in the list.
 output - none
 */
 void print(ListNode* head)
@@ -225,7 +225,7 @@ void insert(ListNode** head, ListNode* newNode)
 
 /*
 This function calculates the length of the list
-input - the adress of the first node in the list.
+input - the adress of the head node in the list.
 output - the length of the list.
 */
 int length(ListNode* head)
@@ -285,7 +285,7 @@ void delete(ListNode** head, int delIndex)
 
 /*
 This function finds a value in the list and prints it's index.
-input - the adress of the first node in the list and the number we want to find.
+input - the adress of the head node in the list and the number we want to find.
 output - none
 */
 //TODO: shorten the function.
