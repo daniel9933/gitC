@@ -1,2 +1,2 @@
 
-    newNode = createNode(2);
+}

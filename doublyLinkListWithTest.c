@@ -122,13 +122,23 @@ void test_add_three_elements_try_to_find_each()
 
     print(head);
 
-    if ((index = find(head, 4)) != NULL)
-    {
-        printf("value was found, it is : %d", index->num);
-    }
-    else
-    {
-        printf("value wasn't found or the list is empty.");
+	if((index = find(head, 4))!= NULL)	
+    {	
+        printf("value was found, it is : %d\n", index->num);	
+    }	
+    else if ((index = find(head, 4)) == NULL)	
+    {	
+        printf("value wasn't found or the list is empty.\n");	
+    }	
+
+
+    if((index = find(head, 3))!= NULL)	
+    {	
+        printf("value was found, it is : %d\n", index->num);	
+    }	
+    else if ((index = find(head, 3)) == NULL)	
+    {	
+        printf("value wasn't found or the list is empty.\n");	
     }
 }
 
