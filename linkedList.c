@@ -9,7 +9,7 @@ typedef struct ListNode
 } ListNode;
 
 
-ListNode* createNode(int num);
+ListNode* createNode(int value);
 void insert(ListNode** head, ListNode* newNode);
 void print(ListNode* head);
 int length(ListNode* head);
@@ -93,10 +93,10 @@ This function creates a node
 input - the integer you want in the node.
 output - a pointer to a struct with the values.
 */
-ListNode* createNode(int num)
+ListNode* createNode(int value)
 {
     ListNode* newListNode = (ListNode*)malloc(sizeof(ListNode));
-    newListNode->num = num;
+    newListNode->num = value;
     newListNode->next = NULL;
     return newListNode;
 }
