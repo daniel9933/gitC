@@ -269,6 +269,7 @@ This function inserts the node into the list.
 input - the adress of the pointer to the list and the new node you want to insert.
 output - none
 */
+//TODO: make last function and change this one.
 void insert(ListNode** head, ListNode* newNode)
 {
     ListNode* p = *head;
@@ -326,7 +327,6 @@ This function deletes a node in the list.
 input - the adress of pointer to the list and the index of the node we want to delete.
 output - none
 */
-//TODO: change the function.
 void delete(ListNode** head, int delIndex)
 {
     ListNode* p = *head;
