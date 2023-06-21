@@ -1,0 +1,4 @@
+﻿  Utils.cpp
+C:\Users\danie\Desktop\c++\stack\stack\Utils.cpp(11,16): warning C4018: '<': signed/unsigned mismatch
+C:\Users\danie\Desktop\c++\stack\stack\Utils.cpp(16,16): warning C4018: '<': signed/unsigned mismatch
+  stack.vcxproj -> C:\Users\danie\Desktop\c++\stack\x64\Debug\stack.exe
