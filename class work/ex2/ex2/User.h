@@ -9,6 +9,7 @@ private :
 	unsigned int _id;
 	unsigned int _age;
 	std::string _username;
+	DevicesList _devices;
 
 public:
 	void init(unsigned int id, std::string username, unsigned int age);
