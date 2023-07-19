@@ -5,7 +5,7 @@
 
 class User
 {
-private :
+private:
 	unsigned int _id;
 	unsigned int _age;
 	std::string _username;
@@ -17,7 +17,7 @@ public:
 	unsigned int getID() const;
 	std::string getUserName() const;
 	unsigned int getAge() const;
-	DevicesList& getDevices() const;
+	DevicesList& getDevices();
 	void addDevice(Device newDevice);
 	bool checkIfDevicesAreOn() const;
 };

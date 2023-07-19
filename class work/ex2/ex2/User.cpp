@@ -1,6 +1,7 @@
 #include <string>
 #include <iostream>
 #include "User.h"
+#include "DeviceList.h"
 
 void User::init(unsigned int id, std::string username, unsigned int age)
 {
@@ -25,9 +26,9 @@ unsigned int User::getAge() const
 {
 	return this->_age;
 }
-DevicesList& User::getDevices() const
+DevicesList& User::getDevices() 
 {
-	return this->_devices.
+	return this->_devices;
 }
 void User::addDevice(Device newDevice)
 {
